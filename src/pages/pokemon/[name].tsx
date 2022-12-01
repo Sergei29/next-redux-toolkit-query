@@ -1,5 +1,6 @@
 import type { NextPage } from "next"
 import Head from "next/head"
+import Image from "next/image"
 import { useRouter } from "next/router"
 import { useGetPokemonByNameQuery } from "../../lib/pokemonApi"
 import { skipToken } from "@reduxjs/toolkit/query"
@@ -28,8 +29,8 @@ const PokemonByNamePage: NextPage<PageProps> = ({}) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>Pokemon By Name Page</h1>
+      <>
+        <h1 className="text-3xl font-bold underline">Pokemon By Name Page</h1>
         <div>
           <article>
             {error ? (
@@ -39,13 +40,17 @@ const PokemonByNamePage: NextPage<PageProps> = ({}) => {
             ) : data ? (
               <>
                 <h3>{data.species.name}</h3>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={data.sprites.front_shiny} alt={data.species.name} />
+                <Image
+                  src={data.sprites.front_shiny}
+                  alt={data.species.name}
+                  width={100}
+                  height={100}
+                />
               </>
             ) : null}
           </article>
         </div>
-      </main>
+      </>
     </>
   )
 }
